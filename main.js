@@ -5,6 +5,7 @@ menuDer.addEventListener('click',toggledesktopMenu);
 function toggledesktopMenu (){
     CartDetails.classList.add('inactive');//desabilita los detalles del producto
     DesktopMenuClick.classList.toggle('inactive');
+    openproductdetailcontainer.classList.add('inactive');
 }
 /* Aparecer Menu Mobile */
 const MobileMenuClick =  document.querySelector('.menu');
@@ -22,6 +23,23 @@ function toggleCartDetails(){
     MobileMenu.classList.add('inactive');//Desabilita el menu mobile
     CartDetails.classList.toggle('inactive');
     DesktopMenuClick.classList.add('inactive');//desabilita el menu desktop
+    openproductdetailcontainer.classList.add('inactive');
+}
+/*Aparecer detalle del producto lado derecho al dar click en un producto */
+const openproductdetailcontainer =  document.querySelector('.product-detail-on-click');
+function openProductDetailAside(){
+    openproductdetailcontainer.classList.remove('inactive');
+    MobileMenu.classList.add('inactive');//Desabilita el menu mobile
+    //CartDetails.classList.toggle('inactive');
+    DesktopMenuClick.classList.add('inactive');//desabilita el menu desktop
+    CartDetails.classList.add('inactive');//desabilita los detalles del producto
+    //DesktopMenuClick.classList.toggle('inactive');
+}
+/*Cerrar detalle de producto lado derecho*/
+const productdetailcontainerClose =  document.querySelector('.product-detail-close');
+productdetailcontainerClose.addEventListener('click',closeproductdetailaside);
+function closeproductdetailaside(){
+    openproductdetailcontainer.classList.add('inactive');
 }
 /* Crear listado de productos */
 /* <div class="product-card">
@@ -60,6 +78,7 @@ function renderproduct (arr){//esta funcion se puede llamar al dar click en otro
     
         const img = document.createElement('img');
         img.setAttribute('src', product.image);//cambia la imagen por lo que esta en el objeto
+        img.addEventListener('click',openProductDetailAside)
     
         const productinfo = document.createElement('div');
         productinfo.classList.add('product-info');
